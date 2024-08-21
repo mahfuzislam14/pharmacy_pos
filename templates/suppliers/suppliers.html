@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<div class="card mt-4">
+
+    <div class="card-header" style="display: flex; align-items: center; justify-content:space-between;">
+
+        <h1> Suppliers List </h1>
+        <a class="btn btn-primary" style="display:flex; justify-self:flex-end;" href="{% url 'create_supplier' %}"> Add
+            Supplier </a>
+    </div>
+
+    <div class="card-body">
+
+        <table class="table">
+
+            <thead>
+                <th>ID</th>
+                <th>Manufactural</th>
+                <th>Supplier Name</th>
+                <th>Supplier Phone</th>
+                <th>Contact Name</th>
+                <th>Contact Phone</th>
+                <th>Action</th>
+            </thead>
+            {% for supplier in suppliers %}
+            <tr>
+                <td>{{supplier.id}}</td>
+                <td>{{ supplier.is_manufactural|yesno:"yes,no" }} </td>
+                <td>{{ supplier.supplier_name }} </td>
+                <td>{{ supplier.supplier_phone }} </td>
+                <td>{{supplier.contact_name}}</td>
+                <td>{{supplier.contact_phone}}</td>
+                <td><a href="{% url 'update_supplier' supplier.id %}"><i class="fa fa-pencil-square-o"
+                            aria-hidden="true"></i></a>
+                    <a href="{% url 'delete_supplier' supplier.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
